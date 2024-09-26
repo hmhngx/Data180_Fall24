@@ -375,12 +375,29 @@ columns: - <code>Name</code>: “Alice”, “Bob”, “Charlie”, “David”
 </div>
 <div id="exercise-1-create-the-data-frame" class="section level1">
 <h1>Exercise 1: Create the data frame</h1>
+<pre class="r"><code>students &lt;- data.frame(
+  Name = c(&quot;Alice&quot;, &quot;Bob&quot;, &quot;Charlie&quot;, &quot;David&quot;, &quot;Eva&quot;),
+  Age = c(18, 21, 20, 19, 18),
+  Major = c(&quot;Math&quot;, &quot;Physics&quot;, &quot;Biology&quot;, &quot;Chemistry&quot;, &quot;Math&quot;),
+  FirstYear = c(2024, 2021, 2022, 2023, 2024)
+)</code></pre>
 </div>
 <div id="exercise-2-count-rows-columns-and-dimensions" class="section level1">
 <h1>Exercise 2: Count rows, columns, and dimensions</h1>
+<pre class="r"><code>nrow(students)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>ncol(students)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>dim(students)</code></pre>
+<pre><code>## [1] 5 4</code></pre>
 </div>
 <div id="exercise-3-filter-for-math-majors" class="section level1">
 <h1>Exercise 3: Filter for Math majors</h1>
+<pre class="r"><code>students[students$Major==&quot;Math&quot;,]</code></pre>
+<pre><code>##    Name Age Major FirstYear
+## 1 Alice  18  Math      2024
+## 5   Eva  18  Math      2024</code></pre>
+<pre class="r"><code># the comma makes R know I want to return all column with major Math</code></pre>
 </div>
 <div id="exercise-4-filter-for-students-older-than-22" class="section level1">
 <h1>Exercise 4: Filter for students older than 22</h1>
