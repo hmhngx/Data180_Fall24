@@ -254,12 +254,13 @@ For a more comprehensive view of ggplot2, take a look at the ggplot2 [Cheat shee
 ## Maps
 ### load United States state map data
 ```{r}
-#install.packages('maps') # you only need to do this once. maps package includes various maps that we can use.
-#install.packages('sf') # you only need to do this once
+install.packages('maps') # you only need to do this once. maps package includes various maps that we can use.
+install.packages('sf') # you only need to do this once
 library(maps)     # Provides latitude and longitude data for various maps
 library(sf)
 # read the state population data
 MainStates <- map_data("state")
+head(Main)
 
 #plot all states with ggplot2, using black borders and light blue fill
 ggplot() + 
