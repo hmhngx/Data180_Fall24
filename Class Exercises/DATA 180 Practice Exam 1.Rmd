@@ -17,21 +17,28 @@ output:
 Create a vector named `departments` with the names of different company departments: "Finance", "HR", "IT", "Marketing", "Operations"
 
 ```{r}
-
+departments <- c("Finance", "HR", "IT", "Marketing", "Operations")
+departments
 ```
 
 a) The `Marketing` department has been renamed to `Sales and Marketing`. Update the vector to reflect this change.
 
 ```{r}
 # Replace the incorrect entry in the vector
-
+departments[4] <- "Sales and Marketing"
+departments
 ```
 
 b) Write a function named `print_departments` that takes a vector of departments and prints each department along with its position in the vector (e.g., "1: Finance").
 
 ```{r}
 # Create the function to print each department and its position
-
+print_departments <- function(departments) {
+  for (i in departments) {
+    print(i)
+  }
+}
+print_departments(departments)
 ```
 
 c) Create a data frame named `department_budget` that contains the following information:
@@ -46,27 +53,34 @@ c) Create a data frame named `department_budget` that contains the following inf
 
 ```{r}
 # Create the data frame
-
+department_budget <- data.frame(
+  Department = c("Finance", "HR", "IT", "Sales and Marketing", "Operations"),
+ Budget =  c(5.0, 2.0, 8.0, 4.5, 6.0)
+)
+department_budget
 ```
 
 d) The budget of the `IT` department has increased by 1.5 million. Update the `department_budget` data frame accordingly.
 
 ```{r}
 # Update the budget of IT department
-
+department_budget[department_budget$Department == "IT",]$Budget <- department_budget[department_budget$Department == "IT",]$Budget + 1.5
+department_budget
 ```
 
 e) Calculate the total budget of all departments.
 
 ```{r}
 # Calculate the total budget
-
+total <- sum(department_budget$Budget)
+total
 ```
 f) Calculate the mean and median budget.
 
 ```{r}
 # Calculate the total budget
-
+mean(department_budget$Budget)
+median(department_budget$Budget)
 ```
 
 
@@ -90,13 +104,15 @@ a) Create a new column named `Total_Sales` that contains the total sales for bot
 
 ```{r}
 # Create the Total_Sales column
-
+sales_data$Total_Sales <- sales_data$Product_A + sales_data$Product_B
+sales_data
 ```
 
 b) Create a new column named `Performance` with values "Good" if total sales exceed 40000, otherwise "Needs Improvement".
 
 ```{r}
 # Create the Performance column
+
 ```
 
 c) Plot a bar chart that shows the total sales of `Product_A` and `Product_B` across all quarters combined.
