@@ -27,7 +27,12 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+data(diamonds)
+#2
+head(diamonds, 6)
+#3
+glimpse(diamonds)
 ```
 
 # Problem 2: Selecting Columns
@@ -40,7 +45,15 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+diamonds_small <- data.frame(
+  Carat = c(diamonds$carat),
+  Cut = c(diamonds$cut),
+  Color = c(diamonds$color),
+  Price = c(diamonds$price)
+)
+#2
+head(diamonds_small, 6)
 ```
 
 # Problem 3: Filtering Rows
@@ -54,8 +67,11 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
-
+#1
+ideal_E_diamonds <- filter(diamonds, cut=="Ideal", color=="E")
+ideal_E_diamonds
+#3
+10
 ```
 
 # Problem 4: Arranging Rows
@@ -68,7 +84,10 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+diamonds_arranged <- arrange(diamonds, desc(diamonds$price))
+#2
+head(diamonds_arranged,10)
 ```
 
 # Problem 5: Creating New Variables
@@ -81,7 +100,9 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+price_gay <- diamonds %>% mutate(price_per_carat=price / carat) %>% select(carat, cut, color, clarity, depth, table, price, price_per_carat)
+head(price_gay)
 ```
 
 # Problem 6: Summarizing Data
@@ -94,7 +115,10 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+avg_price_diamonds <- diamonds %>% group_by(cut) %>% summary(avg_price_diamonds = mean(price))
+#2
+avg_price_diamonds
 ```
 
 # Problem 7: Chaining Multiple Operations
@@ -110,7 +134,8 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
-
+#1
+diamonds %>% filter(carat > 1.5) %>% mutate(price_per_carat = price/carat) %>% arrange(price_per_carat) %>% select(carat, cut, color, price_per_carat) %>% head(10)
 ```
 
 # Problem 8: Counting and Tallying
@@ -124,7 +149,9 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
+diamonds_count <- diamonds %>% count(cut, color) %>% arrange(desc(n))
 
+head(diamonds_count, 10)
 ```
 
 # Problem 9: Sampling Data
@@ -137,6 +164,14 @@ library(ggplot2) # Contains the diamonds dataset
 
 
 ```{r}
+set.seed(123) # For reproducibility
+
+sampled_diamonds <- diamonds %>%
+  sample_n(100) %>%
+  select(carat, cut, color, price)
+
+# Display the sampled data
+sampled_diamonds
 
 ```
 
