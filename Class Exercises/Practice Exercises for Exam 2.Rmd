@@ -17,7 +17,9 @@ library(ggplot2)
 Load the `mtcars` dataset. Use `dplyr` to filter rows where the `mpg` is greater than 25 and display the first 5 rows.
 
 ```{r}
-data(mtcars)
+data(mtcars) 
+data_mtcars <- mtcars %>% filter(mtcars$mpg > 25)
+head(data_mtcars, 5)
 ```
 
 ### Question 2
@@ -25,6 +27,8 @@ Using the `iris` dataset, group the data by `Species` and calculate the mean `Se
 
 ```{r}
 data(iris)
+iris_Species <- iris %>% group_by(Species) %>% summarise(Sepal.Length_mean = mean(Sepal.Length))
+iris_Species
 ```
 
 ### Question 3
@@ -32,6 +36,8 @@ Select only the `cyl` and `hp` columns from the `mtcars` dataset and arrange the
 
 ```{r}
 data(mtcars)
+mtcars_cyl_and_hp <- mtcars %>% select(cyl, hp) %>% arrange(desc(hp))
+mtcars_cyl_and_hp
 ```
 
 ### Question 4
@@ -39,6 +45,8 @@ Use `mutate` on the `mtcars` dataset to create a new column `weight_kg` by conve
 
 ```{r}
 data(mtcars)
+mtcars_lbs_to_kg <- mtcars %>% mutate(weight_kg = wt * 0.45)
+mtcars_lbs_to_kg
 ```
 
 ### Question 5
@@ -46,6 +54,8 @@ Filter the `diamonds` dataset to show only diamonds with a `carat` greater than 
 
 ```{r}
 data(diamonds)
+diamonds_filtered <- diamonds %>% filter(carat > 2.5, price < 10000)
+diamonds_filtered
 ```
 
 ### Question 6
@@ -56,6 +66,8 @@ Write a pipeline to:
 
 ```{r}
 data(iris)
+iris_filtered <- iris %>% filter(Sepal.Width > 3) %>% select(Sepal.Length, Species) %>% arrange(Sepal.Length)
+iris_filtered
 ```
 
 ### Question 7
@@ -63,6 +75,7 @@ Summarize the `mtcars` dataset to find the average horsepower (`hp`) for each un
 
 ```{r}
 data(mtcars)
+mtcars_avg <- mtcars %>% summarise(Mean_hp = mean(hp), Mean)
 ```
 
 ### Question 8
@@ -100,6 +113,9 @@ Perform hierarchical clustering on the `iris` dataset using only the `Sepal.Leng
 
 ```{r}
 data(iris)
+iris_clusters <-hclust(dist(as.matrix(iris[, c("Sepal.Length", "Sepal.Width")])), method = "complete")
+iris_clusters
+plot(iris_clusters)
 ```
 
 ### Question 13
@@ -107,6 +123,9 @@ Using the `mtcars` dataset, cluster the cars based on the `mpg`, `hp`, and `wt` 
 
 ```{r}
 data(mtcars)
+mtcars_clusters <- hclust(dist(as.matrix(mtcars[, c("mpg", "hp", "wt")])), method = "average")
+mtcars_clusters
+plot(mtcars_clusters)
 ```
 
 ### Question 14
@@ -114,6 +133,10 @@ Write R code to put rectangles around 3 clusters in the dendrogram from clusteri
 
 ```{r}
 data(iris)
+iris_clusters <-hclust(dist(as.matrix(iris[, c("Sepal.Length", "Sepal.Width")])), method = "complete")
+plot(iris_clusters)
+rect.hclust(iris_clusters, k = 3, border = "red")
+
 ```
 
 ### Question 15
@@ -135,6 +158,12 @@ Using the `mtcars` dataset, determine the optimal number of clusters (`k`) using
 
 ```{r}
 data(mtcars)
+wss <- numeric(8)
+for (k in 1:8) {
+  wss[k] <- kmeans(as.matrix(mtcars[, c("mpg", "hp", "wt")]), centers = k, nstart = 25)$tot.withinss
+}
+plot(1:8, wss, type = "b", xlab = "Number of Clusters", ylab = "Within groups sum of squares")
+
 ```
 
 ### Question 18
@@ -142,6 +171,7 @@ Plot the k-means clusters from the `iris` dataset (using `Petal.Length` and `Pet
 
 ```{r}
 data(iris)
+
 ```
 
 ### Question 19
